@@ -18,16 +18,16 @@ afterEach(() => {
 
 test('test that App component renders Task', () => {
   render(<App />);
-  // const inputTask = screen.getByRole('textbox', {name: /Add New Item/i});
-  // const inputDate = screen.getByPlaceholderText("mm/dd/yyyy");
-  // const element = screen.getByRole('button', {name: /Add/i});
-  // const dueDate = "05/30/2023";
-  // fireEvent.change(inputTask, { target: { value: "History Test"}});
-  // fireEvent.change(inputDate, { target: { value: dueDate}});
-  // fireEvent.click(element);
-  // const check = screen.getByText(/History Test/i);
+  const inputTask = screen.getByRole('textbox', {name: /Add New Item/i});
+  const inputDate = screen.getByPlaceholderText("mm/dd/yyyy");
+  const element = screen.getByRole('button', {name: /Add/i});
+  const dueDate = "05/30/2023";
+  fireEvent.change(inputTask, { target: { value: "History Test"}});
+  fireEvent.change(inputDate, { target: { value: "05/30/2023"}});
+  fireEvent.click(element);
+  const check = screen.getByText(/History Test/i);
   // const checkDate = screen.getByText(new RegExp(dueDate, "i"));
-  // expect(check).toBeInTheDocument();
+  expect(check).toBeInTheDocument();
   // expect(checkDate).toBeInTheDocument();
  });
 
@@ -113,7 +113,8 @@ test('test that App component renders Task', () => {
   fireEvent.click(element);
 
   const checkbox = screen.getByRole('checkbox');
-  expect().toBe("white");
+  // const check = screen.getAllByText(/History Test/i);
+  // expect(check[0]).toBe("white");
 
   fireEvent.click(checkbox);
 
@@ -121,7 +122,9 @@ test('test that App component renders Task', () => {
   fireEvent.change(inputTask, { target: { value: "History Test"}});
   fireEvent.change(inputDate, { target: { value: "05/30/2022"}});
   fireEvent.click(element);
-  expect().not.toBe("white");
+
+  const check = screen.getAllByText(/History Test/i);
+  expect(check[0].style).not.toBe("white");
 
   // deletion
   fireEvent.click(checkbox);
